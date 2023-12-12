@@ -21,7 +21,7 @@ func Code2Id(context iris.Context) {
 }
 
 func Login(context iris.Context) {
-	handler := context.Handlers()
+	handler := context.Request().Header
 	loginUrl := os.Getenv("LOGIN_URL")
 	if loginUrl == "" {
 		fmt.Printf("login url is empty")
