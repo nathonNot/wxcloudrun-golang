@@ -29,6 +29,7 @@ func Login(context iris.Context) {
 		return
 	}
 	body, _ := json.Marshal(handler)
+	fmt.Printf("login url: %s, body: %s", loginUrl, string(body))
 	resp, err := http.Post(loginUrl, "application/json", bytes.NewBuffer(body))
 	if err != nil {
 		fmt.Printf("login error: %s", err.Error())
