@@ -3,6 +3,7 @@ package service
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 	"github.com/kataras/iris/v12"
 	"io"
 	"net/http"
@@ -23,12 +24,14 @@ func Login(context iris.Context) {
 	handler := context.Handlers()
 	loginUrl := os.Getenv("LOGIN_URL")
 	if loginUrl == "" {
+		fmt.Printf("login url is empty")
 		context.WriteString("login url is empty")
 		return
 	}
 	body, _ := json.Marshal(handler)
 	resp, err := http.Post(loginUrl, "application/json", bytes.NewBuffer(body))
 	if err != nil {
+		fmt.Printf("login error: %s", err.Error())
 		context.WriteString(err.Error())
 		return
 	}
